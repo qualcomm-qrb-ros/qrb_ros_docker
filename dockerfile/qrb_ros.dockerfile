@@ -93,4 +93,4 @@ RUN git clone -b master https://github.com/lebai-robotics/lebai-sdk.git /opt/leb
 # download dependency of qrb_ros_amr_service
 RUN --mount=type=cache,target=/var/cache/apt \
 		apt-get install -y \
-		nav-2d-msgs
+		ros-humble-nav-2d-msgs
