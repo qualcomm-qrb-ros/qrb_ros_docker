@@ -47,17 +47,6 @@ HOST_FILES+=("-v ${HOST_INCLUDE_PATH}/gpiod.h:${CONTAINER_INCLUDE_PATH}/gpiod.h"
 HOST_FILES+=("-v ${HOST_LIB_PATH}/libpulse.so.0:${CONTAINER_LIB_PATH}/libpulse.so.0")
 HOST_FILES+=("-v ${HOST_LIB_PATH}/pulseaudio/libpulsecommon-15.0.so:${CONTAINER_LIB_PATH}/libpulsecommon-15.0.so")
 
-# head files of opencv
-HOST_FILES+=("-v ${HOST_INCLUDE_PATH}/opencv4/opencv2:${CONTAINER_INCLUDE_PATH}/opencv2")
-
-# libs of opencv
-while IFS= read -r file; do
-  if [[ $file == *libopencv* ]]; then
-    filename=$(echo "$file" | sed 's|/usr/lib/||')
-    HOST_FILES+=("-v $file:${CONTAINER_LIB_PATH}/$filename")
-  fi
-done < <(find "/usr/lib" -name "libopencv*")
-
 # socket for qrb_ros_imu
 HOST_FILES+=("-v /dev/shm/server_socket:/dev/shm/server_socket")
 
