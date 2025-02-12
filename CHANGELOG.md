@@ -14,3 +14,9 @@
 
 - Add docker_run_ubuntu.sh
 - Contributors👉 Na Song
+
+## 0.2.0 (2025-2-12)
+
+- dockerfile: optimize the dependency of qrb_ros_nn_inference
+- docker_run.sh: mapping QNN SDK inc and libs from QCLinux host
+- Contributors👉 Na Song
