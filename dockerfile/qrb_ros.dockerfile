@@ -1,11 +1,10 @@
-FROM ros:humble
+FROM --platform=linux/arm64/v8 docker-registry.qualcomm.com/nasong/ros:humble
 
 LABEL maintainer="Na Song <quic_nasong@quicinc.com>"
 LABEL version="1.0"
-LABEL description="this docker file is for testing QUIC_QRB_ROS on RB3 gen2 LE, more details: https://github.com/quic-qrb-ros"
+LABEL description="this docker file is for running QRB ROS applications on QCOM Linux Yocto BSP releases."
 
 # version of dependency, provided in docker_build.sh
-ARG QNN_SDK_VER
 ARG Lebai_SDK_VER
 ARG TensorFlow_VER
 
@@ -15,8 +14,6 @@ ENV SHELL="/bin/bash"
 SHELL ["/bin/bash", "-c"]
 
 # environment variables used in docker container
-ENV QNN_GCC_VER="aarch64-oe-linux-gcc11.2"
-ENV QNN_HEXAGON_VER="hexagon-v68"
 ENV LD_LIBRARY_PATH=/usr/local/lib
 ENV QRB_ROS_WS="/workspace/qrb_ros_ws"
 
@@ -37,15 +34,15 @@ RUN --mount=type=cache,target=/var/cache/apt \
 RUN python3 -m pip install -U \
 		opencv-python
 
+# note: you can delete the dependency of irrelevant packages to reduce image building time.
+
 # download dependency of qrb_ros_nn_inference
-RUN wget -P /opt/qcom https://softwarecenter.qualcomm.com/api/download/software/qualcomm_neural_processing_sdk/v${QNN_SDK_VER}.zip && \
-		cd /opt/qcom && unzip v${QNN_SDK_VER}.zip -d /opt/qcom/qnn_sdk_v${QNN_SDK_VER} && rm -rf v${QNN_SDK_VER}.zip && \
-		cp -R /opt/qcom/qnn_sdk_v${QNN_SDK_VER}/qairt/${QNN_SDK_VER}/lib/${QNN_GCC_VER}/* /usr/local/lib && \
-		cp -R /opt/qcom/qnn_sdk_v${QNN_SDK_VER}/qairt/${QNN_SDK_VER}/bin/${QNN_GCC_VER}/* /usr/local/bin && \
-		cp -R /opt/qcom/qnn_sdk_v${QNN_SDK_VER}/qairt/${QNN_SDK_VER}/lib/${QNN_HEXAGON_VER}/unsigned/* /usr/local/lib && \
-		cp -R /opt/qcom/qnn_sdk_v${QNN_SDK_VER}/qairt/${QNN_SDK_VER}/include/QNN/* /usr/local/include && \
-		rm -rf /opt/qcom/qnn_sdk_v${QNN_SDK_VER} && \
-		git clone --branch v${TensorFlow_VER} https://github.com/tensorflow/tensorflow.git /opt/tensorflow
+RUN git clone --branch v${TensorFlow_VER} https://github.com/tensorflow/tensorflow.git /opt/tensorflow && \
+		cd /opt/tensorflow && \
+		mkdir tflite-build && cd tflite-build && \
+		cmake ../tensorflow/lite/c && \
+		cmake --build . -j8 && \
+		cp ./libtensorflowlite_c.so /usr/local/lib
 
 # download dependency of qrb_ros_transport
 RUN --mount=type=cache,target=/var/cache/apt \
