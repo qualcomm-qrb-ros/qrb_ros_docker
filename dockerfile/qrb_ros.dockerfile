@@ -1,7 +1,6 @@
-FROM --platform=linux/arm64/v8 docker-registry.qualcomm.com/nasong/ros:humble
+FROM ros:humble
 
 LABEL maintainer="Na Song <quic_nasong@quicinc.com>"
-LABEL version="1.0"
 LABEL description="this docker file is for running QRB ROS applications on QCOM Linux Yocto BSP releases."
 
 # version of dependency, provided in docker_build.sh
