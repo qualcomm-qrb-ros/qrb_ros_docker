@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: BSD-3-Clause-Clear
 #
 
+# This dockerfile doesn't contain dependecies of other QRB ROS packages.
 docker run -it --rm \
   --privileged \
   --network host \

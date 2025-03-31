@@ -8,24 +8,26 @@ Dockerfile and running scripts for QRB ROS applications on QCOM Linux Yocto BSP 
 ### Create your ROS2 workspace for QRB ROS
 
 ```bash
-adb root;adb shell "mkdir -p /home/qrb_ros_ws/src"
+mkdir -p /home/qrb_ros_ws/src
 ```
 
-### Download the qrb_ros_docker and push to your device
+### Download the qrb_ros_docker
 
 ```bash
-git clone https://github.com/quic-qrb-ros/qrb_ros_docker
+git clone https://github.com/quic-qrb-ros/qrb_ros_docker /home/qrb_ros_ws/src/
 ```
 
-```bash
-adb push qrb_ros_docker /home/qrb_ros_ws/src/
-```
-
-### Build and Launch the Docker container on your device
+### Build docker container
 
 ```bash
 cd /home/qrb_ros_ws/src/qrb_ros_docker/scripts && \
-bash docker_build.sh && \
+bash docker_build.sh
+```
+
+### Run docker container on QCLinux
+
+```
+cd /home/qrb_ros_ws/src/qrb_ros_docker/scripts && \
 bash docker_run.sh
 ```
 

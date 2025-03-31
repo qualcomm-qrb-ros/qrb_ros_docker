@@ -8,12 +8,10 @@ export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
 # dependency version
-Lebai_SDK_VER="1.1.27"
 TensorFlow_VER="2.16.1"
 
 BUILD_ARG=()
 
-BUILD_ARG+=("--build-arg Lebai_SDK_VER=${Lebai_SDK_VER}")
 BUILD_ARG+=("--build-arg TensorFlow_VER=${TensorFlow_VER}")
 
 docker build ${BUILD_ARG[@]} \
