@@ -28,10 +28,6 @@ RUN --mount=type=cache,target=/var/cache/apt \
 		python3-pip \
 		python3-rosdep
 
-# install the python dependency
-RUN python3 -m pip install -U \
-		opencv-python
-
 # note: you can delete the dependency of irrelevant packages to reduce image building time.
 
 # download dependency of qrb_ros_nn_inference
