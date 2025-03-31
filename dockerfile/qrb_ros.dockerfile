@@ -1,10 +1,9 @@
-FROM ros:humble
+FROM ros:jazzy
 
 LABEL maintainer="Na Song <quic_nasong@quicinc.com>"
 LABEL description="this docker file is for running QRB ROS applications on QCOM Linux Yocto BSP releases."
 
 # version of dependency, provided in docker_build.sh
-ARG Lebai_SDK_VER
 ARG TensorFlow_VER
 
 # disable terminal interaction for apt
@@ -42,51 +41,3 @@ RUN git clone --branch v${TensorFlow_VER} https://github.com/tensorflow/tensorfl
 		cmake ../tensorflow/lite/c && \
 		cmake --build . -j8 && \
 		cp ./libtensorflowlite_c.so /usr/local/lib
-
-# download dependency of qrb_ros_transport
-RUN --mount=type=cache,target=/var/cache/apt \
-		apt-get install -y \
-		ros-humble-pcl-conversions \
-		ros-humble-robot-localization
-
-# download dependency of qrb_ros_robot_base
-RUN --mount=type=cache,target=/var/cache/apt \
-		apt-get install -y \
-		ros-humble-nav2-msgs \
-		ros-humble-xacro \
-		ros-humble-nav2-costmap-2d \
-		ros-humble-robot-state-publisher
-
-# download dependency of qrb_ros_battery
-RUN --mount=type=cache,target=/var/cache/apt \
-		apt-get update && \
-		apt-get install -y \
-		dbus \
-		libdbus-1-dev
-
-# download dependency of qrb_ros_vision_service
-RUN --mount=type=cache,target=/var/cache/apt \
-		apt-get install -y \
-		ros-humble-cv-bridge \
-		libyaml-cpp-dev \
-		libzbar-dev \
-		libopencv-dev
-
-# download dependency of qrb_ros_audio_common
-RUN --mount=type=cache,target=/var/cache/apt \
-		apt-get install -y \
-		libpulse-dev \
-		libsndfile1-dev \
-		libwrap0
-
-# download dependency of qrb_ros_manipulator
-RUN git clone -b master https://github.com/lebai-robotics/lebai-sdk.git /opt/lebai-sdk-${Lebai_SDK_VER} && \
-		cd /opt/lebai-sdk-${Lebai_SDK_VER} && git checkout tags/v${Lebai_SDK_VER} && \
-		mkdir -p /opt/lebai-sdk-${Lebai_SDK_VER}/build && cd /opt/lebai-sdk-${Lebai_SDK_VER}/build && \
-		cmake ..; cmake --build . -j8; cmake --install . && \
-		rm -rf /opt/lebai-sdk-${Lebai_SDK_VER}
-
-# download dependency of qrb_ros_amr_service
-RUN --mount=type=cache,target=/var/cache/apt \
-		apt-get install -y \
-		ros-humble-nav-2d-msgs

@@ -20,3 +20,8 @@
 - dockerfile: optimize the dependency of qrb_ros_nn_inference
 - docker_run.sh: mapping QNN SDK inc and libs from QCLinux host
 - Contributors👉 Na Song
+
+## 1.0.0-jazzy-rc0 (2025-03-31)
+
+- dockerfile: update to ROS2 jazzy
+- Contributors👉 Na Song
