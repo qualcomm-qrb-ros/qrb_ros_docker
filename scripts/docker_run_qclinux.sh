@@ -4,6 +4,8 @@
 # SPDX-License-Identifier: BSD-3-Clause-Clear
 #
 
+setenforce 0
+
 HOST_FILES=()
 
 HOST_LIB_PATH="/usr/lib"
@@ -41,7 +43,6 @@ HOST_FILES+=("-v ${HOST_INCLUDE_PATH}/Saver/:${CONTAINER_INCLUDE_PATH}/Saver/")
 HOST_FILES+=("-v ${HOST_INCLUDE_PATH}/System/:${CONTAINER_INCLUDE_PATH}/System/")
 HOST_FILES+=("-v ${HOST_INCLUDE_PATH}/TFLiteDelegate/:${CONTAINER_INCLUDE_PATH}/TFLiteDelegate/")
 HOST_FILES+=("-v ${HOST_LIB_PATH}/libcalculator.so:${CONTAINER_LIB_PATH}/libcalculator.so")
-HOST_FILES+=("-v ${HOST_LIB_PATH}/libGenie.so:${CONTAINER_LIB_PATH}/libGenie.so")
 HOST_FILES+=("-v ${HOST_LIB_PATH}/libhta_hexagon_runtime_snpe.so:${CONTAINER_LIB_PATH}/libhta_hexagon_runtime_snpe.so")
 HOST_FILES+=("-v ${HOST_LIB_PATH}/libPlatformValidatorShared.so:${CONTAINER_LIB_PATH}/libPlatformValidatorShared.so")
 HOST_FILES+=("-v ${HOST_LIB_PATH}/libQnnChrometraceProfilingReader.so:${CONTAINER_LIB_PATH}/libQnnChrometraceProfilingReader.so")
@@ -95,10 +96,16 @@ HOST_FILES+=("-v ${HOST_LIB_PATH}/libpropertyvault.so.0:${CONTAINER_LIB_PATH}/li
 HOST_FILES+=("-v ${HOST_LIB_PATH}/libpropertyvault.so.0.0.0:${CONTAINER_LIB_PATH}/libpropertyvault.so.0.0.0")
 HOST_FILES+=("-v ${HOST_LIB_PATH}/libllvm-qcom.so:${CONTAINER_LIB_PATH}/libllvm-qcom.so")
 
+# socket for qrb_ros_imu, only enabled on 6490
+HOSTNAME=$(uname -n)
+if [[ "$HOSTNAME" == *"6490"* ]]; then
+    HOST_FILES+=("-v /dev/shm/server_socket:/dev/shm/server_socket")
+fi
+
 docker run -it --rm \
   --privileged \
   --network host \
-  -v /home/qrb_ros_ws/:/workspace/qrb_ros_ws \
+  -v /work/qrb_ros_ws/:/workspace/qrb_ros_ws \
   ${HOST_FILES[@]} \
   --name "qrb_ros_container" \
   --hostname "qrb_ros" \
