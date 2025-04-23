@@ -9,7 +9,7 @@ Dockerfile and running scripts for QRB ROS applications on QCOM Linux Yocto BSP 
 
 ```bash
 mkdir -p ~/qrb_ros_docker && \
-git clone https://github.com/quic-qrb-ros/qrb_ros_docker ~/qrb_ros_docker
+git clone https://github.com/qualcomm-qrb-ros/qrb_ros_docker ~/qrb_ros_docker
 ```
 
 ### Build docker image
@@ -37,10 +37,10 @@ bash docker_run_qclinux.sh
 ```
 
 ## Documentation
-Please refer to the [QRB ROS Documentation](https://quic-qrb-ros.github.io/) for more documents.
-- [Getting Started](https://quic-qrb-ros.github.io/getting_started/index.html)
-- [QRB ROS Packages](https://quic-qrb-ros.github.io/packages/index.html)
-- [Release Notes](https://quic-qrb-ros.github.io/release_notes/index.html)
+Please refer to the [QRB ROS Documentation](https://qualcomm-qrb-ros.github.io/) for more documents.
+- [Getting Started](https://qualcomm-qrb-ros.github.io/getting_started/index.html)
+- [QRB ROS Packages](https://qualcomm-qrb-ros.github.io/packages/index.html)
+- [Release Notes](https://qualcomm-qrb-ros.github.io/release_notes/index.html)
 
 ## Contributing
 
