@@ -30,6 +30,11 @@ RUN --mount=type=cache,target=/var/cache/apt \
 
 # note: you can delete the dependency of irrelevant packages to reduce image building time.
 
+# install dependencies for qrb_ros_transport
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get install -y \
+    ros-jazzy-pcl-conversions
+
 # install dependency of qrb_ros_nn_inference
 RUN git clone --branch v${TensorFlow_VER} https://github.com/tensorflow/tensorflow.git /opt/tensorflow && \
     cd /opt/tensorflow && \
