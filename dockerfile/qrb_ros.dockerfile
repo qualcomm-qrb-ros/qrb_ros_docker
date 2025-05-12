@@ -30,10 +30,14 @@ RUN --mount=type=cache,target=/var/cache/apt \
 
 # note: you can delete the dependency of irrelevant packages to reduce image building time.
 
-# install dependencies
+# install dependencies qrb_ros_transport
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get install -y \
-    ros-jazzy-pcl-conversions \
+    ros-jazzy-pcl-conversions
+
+# install dependencies qrb_ros_interfaces
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get install -y \
     ros-jazzy-vision-msgs
 
 # install dependency of qrb_ros_nn_inference
