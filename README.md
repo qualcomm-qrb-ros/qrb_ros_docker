@@ -1,7 +1,14 @@
 # qrb_ros_docker
 
 ## Overview
-Dockerfile and running scripts for QRB ROS applications on QCOM Linux Yocto BSP releases.
+
+Dockerfile and running scripts for QRB ROS applications on **QCOM Linux**.
+
+The current qrb_ros_docker support **4** packages:
+- [qrb_ros_transport](https://github.com/qualcomm-qrb-ros/qrb_ros_transport)
+- [qrb_ros_nn_inference](https://github.com/qualcomm-qrb-ros/qrb_ros_nn_inference)
+- [qrb_ros_imu](https://github.com/qualcomm-qrb-ros/qrb_ros_imu)
+- [qrb_ros_system_monitor](https://github.com/qualcomm-qrb-ros/qrb_ros_system_monitor)
 
 ## QuickStart
 
@@ -33,7 +40,7 @@ bash docker_build.sh
 
 ```
 cd ~/qrb_ros_docker/scripts && \
-bash docker_run_qclinux.sh
+bash docker_run.sh
 ```
 
 ## Documentation

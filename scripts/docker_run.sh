@@ -96,6 +96,9 @@ HOST_FILES+=("-v ${HOST_LIB_PATH}/libpropertyvault.so.0:${CONTAINER_LIB_PATH}/li
 HOST_FILES+=("-v ${HOST_LIB_PATH}/libpropertyvault.so.0.0.0:${CONTAINER_LIB_PATH}/libpropertyvault.so.0.0.0")
 HOST_FILES+=("-v ${HOST_LIB_PATH}/libllvm-qcom.so:${CONTAINER_LIB_PATH}/libllvm-qcom.so")
 
+# lib for TensorFlowLite
+HOST_FILES+=("-v ${HOST_LIB_PATH}/libtensorflowlite_c.so:${CONTAINER_LIB_PATH}/libtensorflowlite_c.so")
+
 # socket for qrb_ros_imu, only enabled on 6490
 HOSTNAME=$(uname -n)
 if [[ "$HOSTNAME" == *"6490"* ]]; then
