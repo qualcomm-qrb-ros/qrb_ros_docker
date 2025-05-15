@@ -1,7 +1,7 @@
 FROM ros:jazzy
 
 LABEL maintainer="Na Song <quic_nasong@quicinc.com>"
-LABEL description="this docker file is for running QRB ROS applications on QCOM Linux Yocto BSP releases."
+LABEL description="this docker file is for running QRB ROS applications on QCOM Linux"
 
 # version of dependency, provided in docker_build.sh
 ARG TensorFlow_VER
@@ -39,11 +39,3 @@ RUN --mount=type=cache,target=/var/cache/apt \
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get install -y \
     ros-jazzy-vision-msgs
-
-# install dependency of qrb_ros_nn_inference
-RUN git clone --branch v${TensorFlow_VER} https://github.com/tensorflow/tensorflow.git /opt/tensorflow && \
-    cd /opt/tensorflow && \
-    mkdir tflite-build && cd tflite-build && \
-    cmake ../tensorflow/lite/c && \
-    cmake --build . -j8 && \
-    cp ./libtensorflowlite_c.so /usr/local/lib
