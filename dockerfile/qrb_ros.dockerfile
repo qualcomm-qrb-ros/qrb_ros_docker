@@ -17,8 +17,8 @@ ENV QRB_ROS_WS="/workspace/qrb_ros_ws"
 
 # install debian dependency
 RUN --mount=type=cache,target=/var/cache/apt \
-    apt-get update && \
-    apt-get install -y \
+    apt update && \
+    apt install -y \
     git \
     gcc \
     g++ \
@@ -26,16 +26,30 @@ RUN --mount=type=cache,target=/var/cache/apt \
     wget \
     unzip \
     python3-pip \
-    python3-rosdep
+    python3-rosdep \
+    python3-pil && \
+    apt clean
 
 # note: you can delete the dependency of irrelevant packages to reduce image building time.
 
-# install dependencies qrb_ros_transport
+# install dependencies of qrb_ros_transport
 RUN --mount=type=cache,target=/var/cache/apt \
-    apt-get install -y \
-    ros-jazzy-pcl-conversions
+    apt install -y \
+    ros-jazzy-pcl-conversions && \
+    apt clean
 
-# install dependencies qrb_ros_interfaces
+# install dependencies of qrb_ros_interfaces
 RUN --mount=type=cache,target=/var/cache/apt \
-    apt-get install -y \
-    ros-jazzy-vision-msgs
+    apt install -y \
+    ros-jazzy-vision-msgs && \
+    apt clean
+
+# install dependencies of qrb_ros_nn_inference
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt install software-properties-common -y && \
+    add-apt-repository ppa:ubuntu-qcom-iot/qcom-noble-ppa && \
+    apt update && \
+    apt install -y \
+    libtensorflow-lite-c-qcom1=${TensorFlow_VER} \
+    libtensorflow-lite-qcom-dev=${TensorFlow_VER} && \
+    apt clean
