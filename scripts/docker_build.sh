@@ -8,7 +8,7 @@ export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
 # dependency version
-TensorFlow_VER="2.16.1"
+TensorFlow_VER="2.16.1+deps2-0ubuntu2"
 
 BUILD_ARG=()
 
