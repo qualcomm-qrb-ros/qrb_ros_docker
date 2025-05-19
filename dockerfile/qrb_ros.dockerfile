@@ -27,6 +27,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     unzip \
     python3-pip \
     python3-rosdep \
+    python3-opencv \
     python3-pil && \
     apt clean
 
