@@ -3,9 +3,6 @@ FROM ros:jazzy
 LABEL maintainer="Na Song <quic_nasong@quicinc.com>"
 LABEL description="this docker file is for running QRB ROS applications on QCOM Linux"
 
-# version of dependency, provided in docker_build.sh
-ARG TensorFlow_VER
-
 # disable terminal interaction for apt
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV SHELL="/bin/bash"
@@ -51,6 +48,6 @@ RUN --mount=type=cache,target=/var/cache/apt \
     add-apt-repository ppa:ubuntu-qcom-iot/qcom-noble-ppa && \
     apt update && \
     apt install -y \
-    libtensorflow-lite-c-qcom1=${TensorFlow_VER} \
-    libtensorflow-lite-qcom-dev=${TensorFlow_VER} && \
+    libtensorflow-lite-c-qcom1 \
+    libtensorflow-lite-qcom-dev && \
     apt clean
