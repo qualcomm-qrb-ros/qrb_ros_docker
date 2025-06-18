@@ -7,13 +7,6 @@
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
-# dependency version
-TensorFlow_VER="2.16.1+deps2-0ubuntu3"
-
-BUILD_ARG=()
-
-BUILD_ARG+=("--build-arg TensorFlow_VER=${TensorFlow_VER}")
-
-docker build ${BUILD_ARG[@]} \
+docker build \
   -t qrb_ros:latest \
   -f ../dockerfile/qrb_ros.dockerfile .
