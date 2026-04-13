@@ -45,7 +45,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
 # install dependencies of qrb_ros_nn_inference
 RUN --mount=type=cache,target=/var/cache/apt \
     apt install software-properties-common -y && \
-    add-apt-repository ppa:ubuntu-qcom-iot/qcom-noble-ppa && \
+    add-apt-repository ppa:ubuntu-qcom-iot/qcom-ppa && \
     apt update && \
     apt install -y \
     libtensorflow-lite-c-qcom1 \
