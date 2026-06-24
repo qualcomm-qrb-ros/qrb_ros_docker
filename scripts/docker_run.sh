@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: BSD-3-Clause-Clear
 #
 
-setenforce 0
+#setenforce 0
 
 HOST_FILES=()
 
