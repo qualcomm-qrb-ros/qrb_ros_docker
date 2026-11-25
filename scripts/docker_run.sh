@@ -67,6 +67,11 @@ HOST_FILES+=("-v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket")
 # socket for qrb_ros_audio_common
 HOST_FILES+=("-v /var/run/pulse/native:/var/run/pulse/native")
 
+if ! docker image inspect qrb_ros:latest > /dev/null 2>&1; then
+  echo "ERROR: image qrb_ros:latest not found locally. Run docker build first." >&2
+  exit 1
+fi
+
 docker run -it --rm \
   --privileged \
   --network host \
