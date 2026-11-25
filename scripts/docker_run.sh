@@ -102,6 +102,11 @@ if [[ "$HOSTNAME" == *"6490"* ]]; then
     HOST_FILES+=("-v /dev/shm/server_socket:/dev/shm/server_socket")
 fi
 
+if ! docker image inspect qrb_ros:latest > /dev/null 2>&1; then
+  echo "ERROR: image qrb_ros:latest not found locally. Run docker build first." >&2
+  exit 1
+fi
+
 docker run -it --rm \
   --privileged \
   --network host \
